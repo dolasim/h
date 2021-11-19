@@ -1,0 +1,204 @@
+
+<!doctype html>
+<html lang='en' dir='ltr'>
+<head>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <title>Your Desk Lamp Control Station</title>
+   <script defer src='main.js'></script>
+    <script defer src="https://kit.fontawesome.com/dc026329e8.js" crossorigin="anonymous"></script>
+   <script defer>
+
+   </script>
+    
+  <style>
+    body {
+      font-family: averta-semibold;
+      margin:10px;
+      padding:0;
+      background-color:#012443;
+      color:#FDD2BF;
+      text-align:center;
+    }
+@font-face {
+    font-family: averta-semibold;
+    src: url('https://dolasim.github.io/script/font/averta_semibold-webfont.eot');
+    src: url('https://dolasim.github.io/script/font/averta_semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://dolasim.github.io/script/font/averta_semibold-webfont.woff2') format('woff2'),
+         url('https://dolasim.github.io/script/font/averta_semibold-webfont.woff') format('woff'),
+         url('https://dolasim.github.io/script/font/averta_semibold-webfont.svg#averta-semibolduploaded_file') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+    .flex-row {
+      display:flex;
+      flex-direction:row;
+    }
+
+    .flex-row-wrap {
+      display:flex;
+      flex-direction:row;
+      flex-wrap:wrap;
+    }
+
+    .flex-col {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    input[type='text'] {
+      background-color: 012443;
+      color: #FDD2BF;
+	  width: 100%;
+	  border:2px solid #FF6B6B;
+	  border-radius:5px;
+	  font-size: 25;
+	  font-family: averta-semibold;;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+	
+	a:link {
+outline: 0;
+}
+
+    ul li a {
+      display:block;
+      margin:3px;
+      padding:10px;
+      border:2px solid #FF6B6B;
+      border-radius:5px;
+      color:#FF6B6B;
+      text-decoration:none;
+    }
+	
+	    ul li a {
+      display:block;
+      margin:3px;
+      padding:10px;
+      border:2px solid #FF6B6B;
+      border-radius:5px;
+      color:#FF6B6B;
+      text-decoration:none;
+    }
+
+    ul#modes li a {
+      min-width:220px;
+    }
+
+    ul.control li a {
+      min-width:60px;
+      min-height:24px;
+    }
+
+    ul.control {
+      display:flex;
+      flex-direction:row;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0px;
+    }
+
+    ul li a.active {
+      border:2px solid #909090;
+    }
+
+
+//slider
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 50px; /* Specified height */
+  background: #FDD2BF; /* Grey background */
+  outline: none; /* Remove outline */
+ 
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 50px; /* Set a specific slider handle width */
+  height: 50px; /* Slider handle height */
+  background: #FF6B6B; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+//#FF6B6B
+.slider::-moz-range-thumb {
+  width: 50px; /* Set a specific slider handle width */
+  height: 50px; /* Slider handle height */
+  background: FF6B6B; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+
+    
+  </style>
+</head>
+<body>
+  <h1>Your Desk Lamp Control Station</h1>
+  <div class='flex-row'>
+
+    <div class='flex-col'>
+      <div><canvas id='color-canvas' width='360' height='360'></canvas><br/></div>
+
+      <div>
+	   <div><input type='text' id='color-value' oninput='onColor(event, this.value)'/></div>
+        <ul class='control'>
+          <li>RGB Brightness:</li>
+          <li><a href='#' onclick="onBrightness(event, '-')">&#9788;</a></li>
+          <li><a href='#' onclick="onBrightness(event, '+')">&#9728;</a></li>
+        </ul>
+
+        <ul class='control'>
+          <li>Speed:</li>
+          <li><a href='#' onclick="onSpeed(event, '-')">&#8722;</a></li>
+          <li><a href='#' onclick="onSpeed(event, '+')">&#43;</a></li>
+        </ul>
+
+        <ul class='control'>
+          <li>Auto cycle:</li>
+          <li><a href='#' onclick="onAuto(event, '-')">&#9632;</a></li>
+          <li><a href='#' onclick="onAuto(event, '+')">&#9658;</a></li>
+        </ul>
+        <ul class='control'>
+          <li>Power Led:</li>
+          <li><a href='#' onclick="ledOnOff(event, '0')">OFF <i  class='far'>&#xf0eb;</i></a></li>
+          <li><a href='#' onclick="ledOnOff(event, '1')">ON <i  class='fas'>&#xf0eb;</i></a></li>
+        </ul>
+
+
+
+<div class="slidecontainer">
+  <input type="range" min="0" max="255" value="90" class="slider" id="myRange">
+  <p style="font-size: 25">Value : <span id="demo"></span></p>
+</div>
+
+
+        
+      </div>
+    </div>
+
+    <div>
+      <ul id='modes' class='flex-row-wrap'>
+    </div>
+  </div>
+</body>
+</html>
+
